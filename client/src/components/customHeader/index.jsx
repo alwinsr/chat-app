@@ -12,7 +12,7 @@ function  CustomerHeader({ chat }) {
       </div>
       <div className="flex-between">
         <PhoneIcon className='phone-icon  h-6 w-6'/>
-        {chat.description != "⬅️ ⬅️ ⬅️" ? 
+        {chat.description !== "⬅️ ⬅️ ⬅️" ? 
          (<p className="header-text">{chat.description}</p>) :
           (<p className='header-text'>no chat selected</p>)}
       </div>

@@ -1,17 +1,12 @@
-import React from 'react'
+import React from 'react';
 import { useState } from 'react';
-// import $ from 'jquery';
-// import $ from 'jquery';
-// import CloseIcon from '@mui/icons-material/Close';
-// import AttachFileIcon from '@mui/icons-material/AttachFile';
-// import SendIcon from '@mui/icons-material/Send';
-// import Dropzone from 'react-dropzone';
-import MessageFormUI from "./MessageFormUI"
+import MessageFormUI from './MessageFormUI';
+import { usePostAiTextMutation } from '../../state/api';
 
-const StandardMessageForm = ({ props, activeChat }) => {
-
+const Ai = ({ props, activeChat }) => {
     const [message, setMessage] = useState("");
     const [attachment, setAttachment] = useState("");
+    const [trigger] = usePostAiTextMutation();
 
     const handleChange = (e) => setMessage(e.target.value)
 
@@ -24,24 +19,26 @@ const StandardMessageForm = ({ props, activeChat }) => {
             sender_name: props.username,
             text: message,
             activeChatId : activeChat.id
-        }
+        };
 
-        // console.log('form data:', form);
+        console.log('form data:', form);
+        console.log('trigger', trigger)
         
+         
         props.onSubmit(form);
+        trigger(form);
         setMessage("");
         setAttachment("");
 
-    };
-
+    }; 
   return (
     <MessageFormUI
-      setAttachment={setAttachment}
-      message={message}
-      handleChange={handleChange}
-      handleSubmit={handleSubmit}
-    />
+    setAttachment={setAttachment}
+    message={message}
+    handleChange={handleChange}
+    handleSubmit={handleSubmit}
+  />
   )
 }
- 
-export default StandardMessageForm
+
+export default Ai
