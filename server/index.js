@@ -31,11 +31,15 @@ const configuration = new Configuration({
 
 
 /* ROUTES */
-app.use('/openai', openaiRoutes)
+app.use('/openai', openaiRoutes);
 
 /* SERVER SETUP */
 const PORT = process.env.PORT || 9000;
 
-app.listen(PORT, ()=>{
-    console.log("App listenting on port " + PORT);
-})
+// app.listen(PORT, ()=>{
+//     console.log("App listenting on port " + PORT);
+// })
+server.listen(5173, 'localhost'); 
+server.on('listening', function() {
+    console.log('Express server started on port %s at %s', server.address().port, server.address().address);
+});

@@ -14,16 +14,13 @@ const Ai = ({ props, activeChat }) => {
         const date = new Date().toISOString().replace("T", " ").replace("Z", `${Math.floor(Math.random()*1000)}+00:00`);
         const at = attachment ? [{ blob : attachment, file : attachment.name}] : [] ;
         const form = {
-            attachment: at,
+            attachments: at,
             created: date,
-            sender_name: props.username,
+            sender_username: props.username,
             text: message,
             activeChatId : activeChat.id
         };
 
-        console.log('form data:', form);
-        console.log('trigger', trigger)
-        
          
         props.onSubmit(form);
         trigger(form);
@@ -38,7 +35,7 @@ const Ai = ({ props, activeChat }) => {
     handleChange={handleChange}
     handleSubmit={handleSubmit}
   />
-  )
-}
+  );
+};
 
-export default Ai
+export default Ai;

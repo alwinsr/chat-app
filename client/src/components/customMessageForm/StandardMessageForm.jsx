@@ -1,38 +1,30 @@
-import React from 'react'
-import { useState } from 'react';
-// import $ from 'jquery';
-// import $ from 'jquery';
-// import CloseIcon from '@mui/icons-material/Close';
-// import AttachFileIcon from '@mui/icons-material/AttachFile';
-// import SendIcon from '@mui/icons-material/Send';
-// import Dropzone from 'react-dropzone';
-import MessageFormUI from "./MessageFormUI"
+import React, { useState } from "react";
+import MessageFormUI from "./MessageFormUI";
 
 const StandardMessageForm = ({ props, activeChat }) => {
+  const [message, setMessage] = useState("");
+  const [attachment, setAttachment] = useState("");
 
-    const [message, setMessage] = useState("");
-    const [attachment, setAttachment] = useState("");
+  const handleChange = (e) => setMessage(e.target.value);
 
-    const handleChange = (e) => setMessage(e.target.value)
-
-    const handleSubmit = async () => {
-        const date = new Date().toISOString().replace("T", " ").replace("Z", `${Math.floor(Math.random()*1000)}+00:00`);
-        const at = attachment ? [{ blob : attachment, file : attachment.name}] : [] ;
-        const form = {
-            attachment: at,
-            created: date,
-            sender_name: props.username,
-            text: message,
-            activeChatId : activeChat.id
-        }
-
-        // console.log('form data:', form);
-        
-        props.onSubmit(form);
-        setMessage("");
-        setAttachment("");
-
+  const handleSubmit = async () => {
+    const date = new Date()
+      .toISOString()
+      .replace("T", " ")
+      .replace("Z", `${Math.floor(Math.random() * 1000)}+00:00`);
+    const at = attachment ? [{ blob: attachment, file: attachment.name }] : [];
+    const form = {
+      attachments: at,
+      created: date,
+      sender_username: props.username,
+      text: message,
+      activeChatId: activeChat.id,
     };
+
+    props.onSubmit(form);
+    setMessage("");
+    setAttachment("");
+  };
 
   return (
     <MessageFormUI
@@ -41,7 +33,7 @@ const StandardMessageForm = ({ props, activeChat }) => {
       handleChange={handleChange}
       handleSubmit={handleSubmit}
     />
-  )
-}
- 
-export default StandardMessageForm
+  );
+};
+
+export default StandardMessageForm;
