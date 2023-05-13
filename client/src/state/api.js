@@ -9,7 +9,7 @@ export const api = createApi({
             query: (payload) => ({
                 url : "openai/text",
                 method: "POST",
-                body: "payload",
+                body: payload,
 
             }),
         }),
